@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Find all the files with .ext inside ["path/to/find/file"] and its subfolders and copy [to/target/path]
+find /var/backup -type f -name "*.txt" -exec cp -t /opt/application/new {} +
+cd /opt/application/new
+
+# rename extension i.e "$rename 's/\.old$/.new/' *.old"
+rename 's/\.txt$/.html/' *.txt
+
+# add string in first line of every files with ext "sed  -i '1i "string"' *.ext"
+sed  -i '1i <html>' *.html
+
+# add string in end line of every files with ext "sed -i -e '$a\"string"' *.ext"
+sed -i -e '$a\</html>' *.html
+
+# Remove string inside each of the files "sed -i -e 's/[string]//g' *.ext"
+sed -i -e 's/echo//g' *.html
+
+# Replace string "from_string" with string "to_string" inside each of the files "sed -i 's/from_string/to_string/g' *.html"
+sed -i 's/old/new/g' *.html
+
+# Compress all the .ext files into a single file called [name].tar.gz "tar cvzf [name].tar.gz *.ext"
+tar cvzf application.tar.gz *.html
